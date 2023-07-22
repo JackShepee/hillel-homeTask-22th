@@ -1,5 +1,5 @@
 async function fetchQuestions() {
-  const response = await fetch("/questions");
+  const response = await fetch("server/questions");
   const data = await response.json();
 
   function checkAllAnswersSelected() {
@@ -47,7 +47,7 @@ async function submitAnswers() {
     answers.push(value === "true");
   }
 
-  const response = await fetch("/answers", {
+  const response = await fetch("server/answers", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(answers),
