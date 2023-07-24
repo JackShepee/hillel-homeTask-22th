@@ -39,13 +39,18 @@ async function fetchQuestions() {
 }
 
 async function submitAnswers() {
+  const questionEls = document.querySelectorAll('[name^="question"]');
+  const uniqueQuestions = Array.from(new Set(questionEls)).map((el) => el.name);
   const answers = [];
-  for (let i = 0; i < 4; i++) {
-    const value = document.querySelector(
-      `input[name="question${i}"]:checked`
-    ).value;
-    answers.push(value === "true");
-  }
+
+  uniqueQuestions.forEach((name) => {
+    const checkedInput = document.querySelector(
+      `input[name="${name}"]:checked`
+    );
+    if (checkedInput) {
+      answers.push(checkedInput.value === "true");
+    }
+  });
 
   const response = await fetch("/api/answers", {
     method: "POST",
