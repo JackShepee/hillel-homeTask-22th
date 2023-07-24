@@ -24,11 +24,11 @@ async function fetchQuestions() {
   data.forEach((question, index) => {
     const questionElement = document.createElement("div");
     questionElement.innerHTML = `
-    <p>${question.caption}</p>
-    <div class="answer-group">
-        Так: <input type="radio" name="question${index}" value="true">
-        Ні: <input type="radio" name="question${index}" value="false">
-    </div>`;
+          <p>${question.caption}</p>
+          <div class="answer-group">
+              Так: <input type="radio" name="question${index}" value="true">
+              Ні: <input type="radio" name="question${index}" value="false">
+          </div>`;
     questionsDiv.appendChild(questionElement);
   });
 
