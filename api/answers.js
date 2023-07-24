@@ -28,7 +28,7 @@ module.exports = (req, res) => {
   let correctCount = 0;
 
   questions.forEach((question, index) => {
-    if (question.correctAnswer === (userAnswers[index] === "true")) {
+    if (question.correctAnswer === userAnswers[index]) {
       correctCount++;
     }
   });
