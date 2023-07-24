@@ -17,6 +17,10 @@ const questions = [
       "Припинити спливання події можна за допомогою метода stopPropagation?",
     correctAnswer: true,
   },
+  {
+    caption: "test",
+    correctAnswer: false,
+  },
 ];
 
 module.exports = (req, res) => {
