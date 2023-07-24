@@ -41,14 +41,14 @@ async function fetchQuestions() {
 async function submitAnswers() {
   const questionEls = document.querySelectorAll('[name^="question"]');
   const uniqueQuestions = Array.from(new Set(questionEls)).map((el) => el.name);
-  const answers = [];
+  const answers = Array(uniqueQuestions.length).fill(null);
 
-  uniqueQuestions.forEach((name) => {
+  uniqueQuestions.forEach((name, index) => {
     const checkedInput = document.querySelector(
       `input[name="${name}"]:checked`
     );
     if (checkedInput) {
-      answers.push(checkedInput.value === "true");
+      answers[index] = checkedInput.value === "true";
     }
   });
 
