@@ -26,8 +26,8 @@ async function fetchQuestions() {
     questionElement.innerHTML = `
           <p>${question.caption}</p>
           <div class="answer-group">
-              Так: <input type="radio" name="question${index}" value=true>
-              Ні: <input type="radio" name="question${index}" value=false>
+              Так: <input type="radio" name="question${index}" value="true">
+              Ні: <input type="radio" name="question${index}" value="false">
           </div>`;
     questionsDiv.appendChild(questionElement);
   });
@@ -39,16 +39,20 @@ async function fetchQuestions() {
 }
 
 async function submitAnswers() {
-  const questionEls = document.querySelectorAll('[name^="question"]');
-  const uniqueQuestions = Array.from(new Set(questionEls)).map((el) => el.name);
-  const answers = Array(uniqueQuestions.length).fill(null);
+  const questionInputs = document.querySelectorAll('[name^="question"]');
+  const uniqueQuestionNames = [
+    ...new Set([...questionInputs].map((input) => input.name)),
+  ];
+  const answers = [];
 
-  uniqueQuestions.forEach((name, index) => {
+  uniqueQuestionNames.forEach((name) => {
     const checkedInput = document.querySelector(
       `input[name="${name}"]:checked`
     );
     if (checkedInput) {
-      answers[index] = checkedInput.value === "true";
+      answers.push(checkedInput.value === "true");
+    } else {
+      answers.push(null);
     }
   });
 
